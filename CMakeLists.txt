@@ -100,5 +100,5 @@ target_link_libraries(laser_lms511_node
 #   SickLMS5xx
  )
 
-install (TARGETS laser_lms511_node
-    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+# install (TARGETS laser_lms511_node
+#    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
