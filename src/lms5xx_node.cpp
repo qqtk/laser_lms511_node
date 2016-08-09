@@ -86,6 +86,8 @@ int main(int argc, char **argv)
 	int baud;
 	bool inverted = false;
 	int angle;
+	double scope_start_invalid;
+	double scope_end_invalid;
 	double resolution;
 	std::string frame_id;
 	std::string ip_add;
@@ -102,6 +104,9 @@ int main(int argc, char **argv)
 	//nh_ns.param("inverted", inverted, false);
 	nh_ns.param("angle", angle, 0);
 	nh_ns.param("resolution", resolution, 0.0);
+	nh_ns.param("scope_start_invalid", scope_start_invalid, 5.0);
+	nh_ns.param("scope_end_invalid", scope_end_invalid, 5.0);
+	double scope_end_invalid;
 	nh_ns.param<std::string>("ip_add", ip_add, "192.168.1.8");
 	// nh_ns.param<std::string>("ip_add", ip_add, "192.168.137.115");
 	nh_ns.param<std::string> ("frame_id", frame_id, "laser");
@@ -179,8 +184,8 @@ int main(int argc, char **argv)
 
                         // Rotate the coordinate system so we get a range [-95;95] instead of [-5;185].
                         // Avoids the need to manually rotate the laser scanner in the URDF.
-			angle_min = (sick_lms.GetSickStartAngle()-90.) * M_PI / 180.0;
-			angle_max = (sick_lms.GetSickStopAngle()-90.)  * M_PI / 180.0;
+			angle_min = (sick_lms.GetSickStartAngle()-90.0 + scope_start_invalid) * M_PI / 180.0;
+			angle_max = (sick_lms.GetSickStopAngle()-90.0 - scope_end_invalid)  * M_PI / 180.0;
 
 			sick_lms.GetSickMeasurements(range_values, NULL, NULL, NULL, NULL,
 			                             NULL, NULL, NULL, NULL, NULL,
