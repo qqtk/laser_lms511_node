@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 	nh_ns.param("resolution", resolution, 0.0);
 	nh_ns.param("scope_start_invalid", scope_start_invalid, 5.0);
 	nh_ns.param("scope_end_invalid", scope_end_invalid, 5.0);
-	double scope_end_invalid;
+	// double scope_end_invalid;
 	nh_ns.param<std::string>("ip_add", ip_add, "192.168.1.8");
 	// nh_ns.param<std::string>("ip_add", ip_add, "192.168.137.115");
 	nh_ns.param<std::string> ("frame_id", frame_id, "laser");
