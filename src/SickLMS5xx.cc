@@ -1053,8 +1053,8 @@ namespace SickToolbox {
      */
     _sick_scan_config.sick_scan_freq = sick_scan_freq;
     _sick_scan_config.sick_scan_res = sick_scan_res;
-    _sick_scan_config.sick_start_angle = sick_start_angle + 5.0;
-    _sick_scan_config.sick_stop_angle = sick_stop_angle - 5.0; // 2e'je'test'scope'
+    _sick_scan_config.sick_start_angle = sick_start_angle; // + 5.0;
+    _sick_scan_config.sick_stop_angle = sick_stop_angle; // - 5.0; // 2e'je'test'scope'
     
     /* Success */
 
