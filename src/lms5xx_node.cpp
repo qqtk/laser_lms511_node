@@ -125,7 +125,11 @@ int main(int argc, char **argv)
 
 	try {
 		sick_lms.Initialize();
-		if (scan_freq ==50.0)
+		// must First use SICK SOPAS-tool-v3.2.x (Login'with'passwd') to set (scan_freq, scan_resolution) 
+		if (scan_freq ==25.0)
+		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_50,
+		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_50);
+		else if (scan_freq ==50.0)
 		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_50,
 		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_50);
 		else if (scan_freq ==100.0)
@@ -135,7 +139,7 @@ int main(int argc, char **argv)
 		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_50,
 		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_25);
 		else
-		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_25,
+		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_50,
 		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_50);
 		/*sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_25,
 		                               SickLMS5xx::SICK_LMS_5XX_SCAN_RES_25);*/
