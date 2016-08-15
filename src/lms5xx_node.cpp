@@ -89,6 +89,7 @@ int main(int argc, char **argv)
 	double scope_start_invalid;
 	double scope_end_invalid;
 	double resolution;
+	double scan_freq;
 	std::string frame_id;
 	std::string ip_add;
 	double scan_time = 0;
@@ -104,6 +105,7 @@ int main(int argc, char **argv)
 	//nh_ns.param("inverted", inverted, false);
 	nh_ns.param("angle", angle, 0);
 	nh_ns.param("resolution", resolution, 0.0);
+	nh_ns.param("freq", scan_freq, 25.0);
 	nh_ns.param("scope_start_invalid", scope_start_invalid, 5.0);
 	nh_ns.param("scope_end_invalid", scope_end_invalid, 5.0);
 	// double scope_end_invalid;
@@ -122,7 +124,17 @@ int main(int argc, char **argv)
 
 	try {
 		sick_lms.Initialize();
-		sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_50,
+		if (scan_freq ==50.0)
+		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_50,
+		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_50);
+		else if (scan_freq ==100.0)
+		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_25,
+		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_25);
+		else if (scan_freq ==200.0)
+		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_50,
+		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_25);
+		else
+		    sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_25,
 		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_50);
 		/*sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_25,
 		                               SickLMS5xx::SICK_LMS_5XX_SCAN_RES_25);*/
