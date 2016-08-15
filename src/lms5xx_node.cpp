@@ -86,6 +86,7 @@ int main(int argc, char **argv)
 	string port;
 	int baud;
 	bool inverted = false;
+	int subsample_scan_num;
 	int angle;
 	double scope_start_invalid;
 	double scope_end_invalid;
@@ -104,6 +105,7 @@ int main(int argc, char **argv)
 	//nh_ns.param("port", port, string("/dev/lms200"));
 	//nh_ns.param("baud", baud, 38400);
 	//nh_ns.param("inverted", inverted, false);
+	nh_ns.param("subsample_scan", subsample_scan_num, 1);
 	nh_ns.param("angle", angle, 0);
 	nh_ns.param("resolution", resolution, 0.0);
 	nh_ns.param("scan_frequency", scan_freq, 50.0);
@@ -227,7 +229,7 @@ int main(int argc, char **argv)
 			}*/
 			last_scan_time = start;
 
-                        if (ulong_seq%2 ==0) {
+                        if (ulong_seq% subsample_scan_num ==0) {
 			  publish_scan(&scan_pub, range_values, n_range_values,
 			             intensity_values, n_intensity_values, scale, start,
 			             scan_time, inverted, angle_min, angle_max, frame_id);
@@ -249,4 +251,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
