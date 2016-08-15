@@ -42,6 +42,7 @@
 #include "sensor_msgs/LaserScan.h"
 using namespace SickToolbox;
 using namespace std;
+unsigned long long ulong_seq =0;
 
 void publish_scan(ros::Publisher *pub, uint32_t *range_values,
                   uint32_t n_range_values, uint32_t *intensity_values,
@@ -219,9 +220,12 @@ int main(int argc, char **argv)
 			}*/
 			last_scan_time = start;
 
-			publish_scan(&scan_pub, range_values, n_range_values,
+                        if (ulong_seq%2 ==0) {
+			  publish_scan(&scan_pub, range_values, n_range_values,
 			             intensity_values, n_intensity_values, scale, start,
 			             scan_time, inverted, angle_min, angle_max, frame_id);
+                        }
+                        ulong_seq +=1;
 			ros::spinOnce();
 		}
 	} catch(...) {
