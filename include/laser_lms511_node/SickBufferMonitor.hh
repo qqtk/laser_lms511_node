@@ -457,7 +457,7 @@ namespace SickToolbox {
       }
 
       /* sleep a bit! */
-      usleep(1000);
+      usleep(5000); // 1ms'5ms'
       
     }    
 
